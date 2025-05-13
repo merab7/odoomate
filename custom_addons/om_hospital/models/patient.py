@@ -26,7 +26,7 @@ class HospitalPatient(models.Model):
     @api.ondelete(at_uninstall=True)
     def _check_if_patient_is_linked_to_appointment(self):
             """
-            if patient is linked to appointment then do not delete it
+            if the patient is linked to appointment then do not delete it
             """
             domain = [('patient_id', '=', self.id)]
             for rec in self:

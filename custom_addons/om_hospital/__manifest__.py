@@ -3,9 +3,10 @@
     "author":"Merab Todua",
     "version": "17.0.1.1",
 
-    "depends":['mail','product'],
+    "depends":['mail', 'product'],
 
     "data":[
+      'security/security.xml',
       'security/ir.model.access.csv',
       'data/sequence.xml',
       'views/patient_views.xml',

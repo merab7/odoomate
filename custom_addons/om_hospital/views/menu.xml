@@ -6,7 +6,7 @@
     <menuitem id="menu_patients_readonly" name="View Patients" parent="menu_frontdesk" action="om_hospital.action_hospital_readonly_patient" />
     <menuitem id="menu_patient_appointment" name="Add Appointment" parent="menu_frontdesk" action="om_hospital.action_hospital_appointment" />
     <menuitem id="menu_patient_appointment_line" name="Appointment Lines" parent="menu_frontdesk" action="om_hospital.action_hospital_appointment_line" />
-    <menuitem id="menu_configuration" sequence="100" name="Configuration" parent="menu_hospital_root"/>
+    <menuitem id="menu_configuration" sequence="100" name="Configuration" parent="menu_hospital_root" groups="om_hospital.group_hospital_doctor"/>
     <menuitem id="menu_patient_tag" name="Add Tags" parent="menu_configuration" action="om_hospital.action_patient_tag" />
 </odoo>
 

@@ -91,7 +91,7 @@ class HospitalAppointmentLine(models.Model):
 
     appointment_id = fields.Many2one('hospital.appointment', string='Appointment')
 
-    product_id = fields.Many2one('product.product', string='Product')
+    product_id = fields.Many2one('hospital.medicament', string='Medicaments')
     qty = fields.Float(string='Quantity')
 
 
