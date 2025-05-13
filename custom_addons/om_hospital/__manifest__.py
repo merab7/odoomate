@@ -3,7 +3,7 @@
     "author":"Merab Todua",
     "version": "17.0.1.1",
 
-    "depends":['mail', 'product'],
+    "depends":['mail', 'product', 'account'],
 
     "data":[
       'security/security.xml',
