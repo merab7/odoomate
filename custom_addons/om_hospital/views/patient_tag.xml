@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="patient_tag_tree_view" model="ir.ui.view">
+            <field name="name">patient.tag.tree</field>
+            <field name="model">patient.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Patient Tag" editable="top">
+                    <field name="sequence" widget="handle"/>
+                     <field name="name"/>
+                </tree>
+
+
+            </field>
+
+
+        </record>
+
+<!--        <div class="oe_chatter">-->
+<!--            <field name="message_follower_ids" groups="base.group_user"/>-->
+<!--            <field name="message_ids"/>-->
+<!--        </div>-->
+
+        <record id="action_patient_tag" model="ir.actions.act_window">
+            <field name="name">Patient Tags</field>
+            <field name="res_model">patient.tag</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                     Create a new patient tag
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
