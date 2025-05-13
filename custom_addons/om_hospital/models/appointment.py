@@ -4,19 +4,25 @@ from odoo import  api, models, fields
 class HospitalAppointment(models.Model):
     _name = 'hospital.appointment'
     _description = "Hospital Appointment"
+    _rec_names_search = ['reference', 'patient_id']
     _inherit = ['mail.thread']
     _rec_name = 'patient_id'
 
+
     reference = fields.Char(string="Reference", default='New')
-    patient_id = fields.Many2one('hospital.patient', string="patient")
+    patient_id = fields.Many2one('hospital.patient', string="patient", ondelete='restrict' )
     line_ids = fields.One2many('hospital.appointment.line', 'appointment_id', string="Lines")
     appointment_date = fields.Date(string="Time")
+    total_quantity = fields.Float(string="Total Quantity", compute='_compute_total_quantity', store=True)
     note = fields.Text(string="Note")
     state = fields.Selection([('draft', 'Draft'),
                               ('confirmed', 'Confirmed'),
                               ('ongoing', 'Ongoing'),
                               ('done', 'Done'),
                               ('cancel', 'Canceled')], default='draft', tracking=True)
+    dob = fields.Date(string="Date of Birth", readonly=True, related='patient_id.date_of_birth', store=True)
+
+
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -63,6 +69,19 @@ class HospitalAppointment(models.Model):
         """
         for rec in self:
             rec.state = 'draft'
+
+    @api.depends('patient_id', 'reference')
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = f'[{rec.reference}] {rec.patient_id.name}]'
+
+    @api.depends('line_ids', 'line_ids.qty')
+    def _compute_total_quantity(self):
+        for rec in self:
+           rec.total_quantity = sum(line.qty for line in rec.line_ids)
+
+
+
 
 
 
