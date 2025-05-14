@@ -103,6 +103,29 @@
         </record>
 
 
+
+        <record id="view_hospital_appointment_search" model="ir.ui.view">
+            <field name="name">hospital.patient.appointment</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <search string="Patients">
+                    <field name="appointment_date"/>
+                    <field name="reference" string="Reference" filter_domain="['|',('reference','ilike',self),('patient_id','ilike',self)]"/>
+                    <field name="patient_id"/>
+                    <field name="total_quantity"/>
+
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="group_by_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
+                    </group>
+
+                    <searchpanel>
+                        <field name="patient_id" string="Patient" enable_counters="1"/>
+                    </searchpanel>
+
+                </search>
+            </field>
+        </record>
+
         <record id="action_hospital_appointment" model="ir.actions.act_window">
             <field name="name">Appointment</field>
             <field name="res_model">hospital.appointment</field>

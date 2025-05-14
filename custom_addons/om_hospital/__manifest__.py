@@ -14,6 +14,7 @@
       'views/patient_appointment.xml',
       'views/patient_tag.xml',
       'views/appointment_line.xml',
+     'views/account_move_views.xml',
       'views/menu.xml',
 
 

@@ -21,6 +21,9 @@ class HospitalPatient(models.Model):
                                'tag_id',
                                string="Tags")
 
+    is_minor = fields.Boolean(string="Is Minor")
+    guardian = fields.Char(string="Guardian")
+
 
 
     @api.ondelete(at_uninstall=True)

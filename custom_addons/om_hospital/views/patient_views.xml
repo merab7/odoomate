@@ -25,6 +25,8 @@
                             <group>
                                 <field name="name"/>
                                 <field name="date_of_birth"/>
+                                <field name="is_minor"/>
+                                <field name="guardian" invisible="not is_minor" required="is_minor"/>
                             </group>
                             <group>
                                 <field name="gender"/>
@@ -42,15 +44,52 @@
 
 
 
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search string="Patients">
+                <field name="name"/>
+                <field name="date_of_birth"/>
+                <field name="gender"/>
+                <field name="guardian"/>
+                <filter name="male_patients" string="Male" domain="[('gender', '=', 'male')]"/>
+                <!--
+                  we can have here <separator/> which will make this fileter working with 'and' logic
+                  instead of 'or'
+                />-->
+                <filter name="female_patients" string="Female" domain="[('gender', '=', 'female')]"/>
 
-        <record id="action_hospital_patient" model="ir.actions.act_window">
-            <field name="name">Patients</field>
-            <field name="res_model">hospital.patient</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p>
-                    Create a new patient
-                </p>
-            </field>
-        </record>
+                <group expand="0" name="group_by" string="Group By">
+                        <filter name="group_by_gender" string="Gender" context="{'group_by': 'gender'}"/>
+                </group>
+
+
+                <searchpanel>
+                    <field name="gender" string="Gender" enable_counters="1"/>
+                </searchpanel>
+
+            </search>
+
+
+
+
+        </field>
+    </record>
+
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+        <!-- adding default filter -->
+        <field name="context">
+            {'search_default_male_patients': 1}
+        </field>
+        <field name="help" type="html">
+            <p>
+                Create a new patient
+            </p>
+        </field>
+    </record>
 </odoo>
